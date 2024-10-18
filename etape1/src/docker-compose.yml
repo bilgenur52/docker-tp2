@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  http:
+    image: nginx:latest
+    ports:
+      - "8080:80"  # Redirige le port 80 du conteneur vers le port 8080 de l'hôte
+    volumes:
+      - ./src:/app  # Monte le répertoire src sur /app dans le conteneur
+      - ./config/nginx.conf:/etc/nginx/conf.d/default.conf  # Monte la configuration Nginx
+  script:
+    image: php:fpm  # Utilise l'image PHP avec FPM
+    volumes:
+      - ./src:/app  # Monte le répertoire src sur /app dans le conteneur
